@@ -11,7 +11,13 @@ const getSum = (a, b) => {
   let temp = new Array(8);
   temp.fill(0);
 
+  if (a === 0) {
+    return b;
+  }
 
+  if (b === 0) {
+    return a;
+  }
   Math.sign(a) === 1 ? bitA = a.toString(2) : bitA = (a * -1).toString(2);
   Math.sign(b) === 1 ? bitB = b.toString(2) : bitB = (b * -1).toString(2);
   bitA = ('00000000' + bitA).substr(-8);
@@ -34,7 +40,10 @@ const getSum = (a, b) => {
   }
 
   temp = parseInt(temp.join(''), 2);
+  if (Math.sign(a) === -1 && Math.sign(b) === -1) {
+    return temp * -1;
+  }
   return temp;
 }
 
-console.log(getSum(15, 120));
+console.log(getSum(-15, -120));
