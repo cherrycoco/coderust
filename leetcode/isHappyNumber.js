@@ -11,21 +11,57 @@
 // 62 + 82 = 100
 // 12 + 02 + 02 = 1
 
-var isHappy = function(n, num = n) {
-  let str = n.toString();
-  let sum = 0;
 
-  for (let char of str) {
-    sum += Math.pow(Number(char), 2);
-  }
+// var isHappy = function(n, cache = {}) {
+//   let str = n.toString();
+//   let sum = 0;
 
-  if (sum === num) {
-    return false;
-  } 
+//   for (let char of str) {
+//     sum += char**2;
+//   }
 
-  return sum === 1 ? true : isHappy(sum, num);
-};
+//   if (cache[sum]) {
+//     return false;
+//   } 
 
-// console.log(isHappy(7));
+//   if (sum === 1) {
+//     return true;
+//   } else {
+//     cache[sum] = true;
+//     return isHappy(sum, cache);
+//   }
+// };
+
+// console.log(isHappy(2));
+var memoizeHappy = function () {
+  let cache = {};
+
+  var isHappy = function(n) {
+    let str = n.toString();
+    let sum = 0;
+  
+    for (let char of str) {
+      sum += char**2;
+    }
+  
+    if (cache[sum]) {
+      return false;
+    } 
+  
+    if (sum === 1) {
+      return true;
+    } else {
+      cache[sum] = true;
+      return isHappy(sum);
+    }
+  };
+
+  return isHappy;
+}
+
+let isHappy = memoizeHappy();
+
+console.log(isHappy(2));
+
 
 
