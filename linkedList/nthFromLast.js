@@ -1,23 +1,44 @@
-const nthFromLast = (head, n) => {
-  let count = 0; 
-  let node = head; 
+// const nthFromLast = (head, n) => {
+//   let count = 0; 
+//   let node = head; 
 
-  while (node) {
-    count++;
-    node = node.next;
-  }
+//   while (node) {
+//     count++;
+//     node = node.next;
+//   }
   
-  if (n >= count) {
-    return null;
-  }
+//   if (n >= count) {
+//     return null;
+//   }
 
-  node = head; 
-  while (count - n - 1 > 0) {
-    node = node.next; 
+//   node = head; 
+//   while (count - n - 1 > 0) {
+//     node = node.next; 
+//     count--;
+//   }
+
+//   return node;
+// }
+
+const nthFromLast = (head, n) => {
+  let fastPointer = head;
+  let slowPointer = head;
+  let count = n;
+
+  while (count > 0) {
+    if (!fastPointer) {
+      return null;
+    }
+    fastPointer = fastPointer.next; 
     count--;
   }
 
-  return node;
+  while (fastPointer) {
+    fastPointer = fastPointer.next;
+    slowPointer = slowPointer.next;
+  }
+
+  return slowPointer;
 }
 
 class Node {
@@ -36,4 +57,4 @@ a.next = b;
 b.next = c;
 c.next = d;
 
-console.log(nthFromLast(a, 1));
+console.log(nthFromLast(a, 3));
