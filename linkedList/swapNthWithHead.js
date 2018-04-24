@@ -44,3 +44,4 @@ b.next = c;
 c.next = d;
 
 console.log(swapNthWithHead(a, 3));
+console.log(a);
